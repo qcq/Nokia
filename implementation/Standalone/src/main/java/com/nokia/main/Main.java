@@ -22,7 +22,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.UUID;
 
 
 /**
@@ -49,7 +48,6 @@ public class Main {
     count = a;
   }
 
-
   private void initial() {
     PropertyConfigurator.configureAndWatch(LOG_CONFIG_FILE_PATH, LOG_CONFIG_CHECK_DELAY_MS);
     context = new ClassPathXmlApplicationContext(SPRING_CONFIG_FILE_PATH);
@@ -57,27 +55,6 @@ public class Main {
 
   public ApplicationContext getContext() {
     return context;
-  }
-
-  public UUID generateId() {
-    this.random = new Random();
-    byte[] randomBytes = new byte[16];
-    this.random.nextBytes(randomBytes);
-    System.out.println(randomBytes);
-
-    long mostSigBits = 0;
-    for (int i = 0; i < 8; i++) {
-      mostSigBits = (mostSigBits << 8) | (randomBytes[i] & 0xff);
-      System.out.println(mostSigBits);
-    }
-
-    long leastSigBits = 0;
-    for (int i = 8; i < 16; i++) {
-      leastSigBits = (leastSigBits << 8) | (randomBytes[i] & 0xff);
-      System.out.println(leastSigBits);
-    }
-
-    return new UUID(mostSigBits, leastSigBits);
   }
 
   public static void main(String[] args) {
